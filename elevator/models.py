@@ -12,7 +12,7 @@ class Elevator(models.Model):
     min_floor = models.IntegerField(db_column='min_floor', null=False) # min floor served by the elevator
     max_floor = models.IntegerField(db_column='max_floor', null=False) # max floor served by the elevator
     def __str__(self):
-        return self.id
+        return str(self.id)
     class Meta:
         db_table = 'elevator'
 
@@ -21,7 +21,7 @@ class ElevatorStatus(models.Model):
     status = models.CharField(db_column='status', max_length=10, null=False) # idle, moving, stopped
 
     def __str__(self):
-        return self.id
+        return str(self.status)
     class Meta:
         db_table = 'elevator_status'
     
