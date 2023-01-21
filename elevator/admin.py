@@ -1,3 +1,6 @@
 from django.contrib import admin
+from elevator.models import Elevator, ElevatorStatus
 
-# Register your models here.
+
+admin.site.register(Elevator) # register the Elevator model in the admin site
+admin.site.register(ElevatorStatus)
