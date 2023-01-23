@@ -1,9 +1,7 @@
 import json
-from unittest.mock import patch, Mock
 
 from django.test import TestCase
-from django.urls import reverse
-from rest_framework.test import APIRequestFactory, APIClient
+from rest_framework.test import APIClient
 
 CONTENT_TYPE = "application/json; charset=utf-8"
 

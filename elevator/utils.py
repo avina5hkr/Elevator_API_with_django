@@ -60,8 +60,6 @@ def on_called(elevator_id, current_floor, destination_floor):
 def call_when_idle(elevator_id, current_floor, destination_floor):
     """
     This is called when the elevator is idle.
-    This is called when the elevator is idle.
-    The elevator should decide whether to go up or down.
     """
     elevator = Elevator.objects.get(id=elevator_id)
     if elevator.status.status == "idle":

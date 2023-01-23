@@ -1,9 +1,6 @@
 import json
 from rest_framework import viewsets
-from rest_framework.mixins import UpdateModelMixin
 from elevator import models, serializers
-from django.views.decorators.http import require_http_methods
-from django.http import JsonResponse
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -12,12 +9,18 @@ from elevator import utils
 
 
 class ElevatorViewSet(viewsets.ModelViewSet):
+    """
+    As we need to perform standard CRUD operations on the Elevator model, we are using ModelViewSet
+    """
     queryset = models.Elevator.objects.all()
     serializer_class = serializers.ElevatorSerializer
 
 
 @api_view(["POST"])
 def use_elevator(request):
+    """
+    Handles the user requests to use the elevator
+    """
     if request.method == 'POST':
         payload = json.loads(request.body.decode('utf-8'))
         elevator_id = payload.get('elevator_id')
@@ -47,6 +50,9 @@ def use_elevator(request):
 
 @api_view(["POST"])
 def elevator_maintainence(request):
+    """
+    Handles maintainence requests for the elevator
+    """
     if request.method == 'POST':
         payload = json.loads(request.body.decode('utf-8'))
         elevator_id = payload.get('elevator_id')
