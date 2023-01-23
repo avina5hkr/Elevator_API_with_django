@@ -42,7 +42,7 @@ Example Payload for creating new elevator:
 ```  
         
 
-<li><h3>Endpoint: `/elevator/elevator/<elevator-id>` <h3> </li>  
+<li><h3>Endpoint: `/elevator/elevator/{elevator-id}` <h3> </li>  
 
 >METHODS: [GET, DELETE, PUT]  
 
