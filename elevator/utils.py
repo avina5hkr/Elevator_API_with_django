@@ -35,12 +35,12 @@ def on_called(elevator_id, current_floor, destination_floor):
         destination_floor: the destination floor the caller wants to go to
         """
         elevator = Elevator.objects.get(id=elevator_id)
+        if elevator.status == None:
+            return "This elevator is not working"
         if current_floor < elevator.min_floor or current_floor > elevator.max_floor:
             return "Current floor is not served by this elevator"
         if destination_floor < elevator.min_floor or destination_floor > elevator.max_floor:
             return "Destination floor is not served by this elevator"
-        if elevator.status.status == None:
-            return "Elevator is not working"
         if elevator.status.status == "idle":
             call_when_idle(elevator_id, current_floor, destination_floor)
             move_elevator(elevator_id)
@@ -54,7 +54,8 @@ def on_called(elevator_id, current_floor, destination_floor):
             elif elevator.destination_floor < destination_floor:
                 elevator.destination_floor = destination_floor
                 move_elevator(elevator_id)
-        return "Request accepted"
+        elevator = Elevator.objects.get(id=elevator_id)
+        return f"Request completed, elevator is at {elevator.current_floor} floor, and status is {elevator.status.status}"
 
 def call_when_idle(elevator_id, current_floor, destination_floor):
     """
@@ -75,8 +76,9 @@ def start_maintainence(elevator_id):
     This is called when the elevator is in maintainence mode.
     """
     elevator = Elevator.objects.get(id=elevator_id)
-    elevator.status = ElevatorStatus.objects.get(status=None)
+    elevator.status = None
     elevator.save()
+    return "Elevator is in maintainence mode"
 
 def finish_maintainence(elevator_id):
     """
@@ -88,3 +90,4 @@ def finish_maintainence(elevator_id):
     elevator.direction = None
     elevator.status = ElevatorStatus.objects.get(status="idle")
     elevator.save()
+    return "Maintainence complete, elevator is ready to use"

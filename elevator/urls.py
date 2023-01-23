@@ -7,5 +7,7 @@ router.register(r'elevator', views.ElevatorViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('use/', views.use_elevator),
+    path('maintainence/', views.elevator_maintainence),
     path('api-auth/', include('rest_framework.urls'))
 ]
