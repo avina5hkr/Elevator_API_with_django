@@ -14,7 +14,7 @@ Description
 
 This is a Django Rest Framework based API implementing an Elevator system.
 
-You can check working screenshots in <a href="/readme_assets">readme_assets</a> folder
+Please check working screenshots in <a href="/readme_assets">readme_assets</a> folder
 
 API Endpoints:
 ---------------------
