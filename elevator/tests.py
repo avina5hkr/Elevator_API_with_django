@@ -3,7 +3,7 @@ from unittest.mock import patch, Mock
 
 from django.test import TestCase
 from django.urls import reverse
-
+from rest_framework.test import APIRequestFactory, APIClient
 
 CONTENT_TYPE = "application/json; charset=utf-8"
 
@@ -16,9 +16,22 @@ class ElevatorViewsTestCase(TestCase):
         """
         Testing for create new elevator
         """
-        payload = {}
+        payload = {
+        "location": "main",
+        "current_floor": 0,
+        "destination_floor": 0,
+        "direction": None,
+        "working": True,
+        "min_floor": 0,
+        "max_floor": 10,
+        "max_occupancy": 10,
+        "current_occupancy": 0,
+        "status": None
+    }
 
-        response = self.client.post(reverse('create_new_elevator'), payload, content_type=CONTENT_TYPE)
+        client = APIClient()
+
+        response = client.post('/elevator/elevator/', json.dumps(payload), content_type='application/json')
         response_json = response.json()
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(response_json.get('status'), 'created')
+        self.assertEqual(response.status_code, 201)
+        self.assertEqual(response_json.get('id'), 1)

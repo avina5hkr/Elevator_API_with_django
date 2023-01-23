@@ -1,7 +1,11 @@
-from django.urls import path
+from django.urls import path, include
+from rest_framework import routers
 
-from . import views
+from elevator import views
+router = routers.DefaultRouter()
+router.register(r'elevator', views.ElevatorViewSet)
 
 urlpatterns = [
-    path("create/", views.create_new_elevator, name='create_new_elevator'),
+    path('', include(router.urls)),
+    path('api-auth/', include('rest_framework.urls'))
 ]
