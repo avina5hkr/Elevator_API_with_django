@@ -65,11 +65,11 @@ Example JSON Payload for update:
 
 >METHODS: [POST] 
 
-Example payload for using an elevator:
+Example payload for using an elevator (elevator_name is optional, if id is not provided it is used) :  
 ```json
 {
     "elevator_id": 1,  
-    "elevator_name": "main",   # (optional) if id is not provided
+    "elevator_name": "main",  
     "current_floor": 1,
     "destination_floor": 7
 }
@@ -79,11 +79,11 @@ Example payload for using an elevator:
 
 >METHODS: [POST] 
 
-Example payload to put elevator in maintainance and in normal mode:
+Example payload to put elevator in maintainance and in normal mode (action supports "start" and "finish") : 
 ```json
 {
     "elevator_id": 1,
-    "action": "start"    # "finish" for going back to normal mode
+    "action": "start"
 }
 ```
 
@@ -93,21 +93,33 @@ Running on local machine
 ---------------------
 1. Clone this project<br>
   ```
-  $ git clone https://github.com/avina5hkr/Elevator_API_with_django.git
+  git clone https://github.com/avina5hkr/Elevator_API_with_django.git
   ```  
 2. Create and activate a virtual environment (optional) <br>
   ```bash python
-  $ python -m venv venv
-  $ source venv/bin/activate
+  python -m venv venv
+  source venv/bin/activate
   ```
 3. Install the python dependencies
   ```python
-  $ pip install -r requirements.txt
+  pip install -r requirements.txt
   ```
-4. Run the development server
+4. run migrations to add tables to db
   ```python
-  $ python manage.py runerver 0.0.0.0:8000
+  python manage.py migrate
   ```
+5. Run the development server
+  ```python
+  python manage.py runerver 0.0.0.0:8000
+  ```
+7. create a superuser for the admin page
+```python
+python manage.py createsuperuser
+```
+6. Go to django admin page and add values ``"idle"`` and ``"moving"`` in ElevatorStatus table  
+```
+http://localhost:8000/admin/elevator/elevatorstatus/
+```  
 
 
 
