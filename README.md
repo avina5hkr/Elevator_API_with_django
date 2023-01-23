@@ -14,6 +14,8 @@ Description
 
 This is a Django Rest Framework based API implementing an Elevator system.
 
+You can check working screenshots in <a href="/readme_assets">readme_assets</a> folder
+
 API Endpoints:
 ---------------------
 <ul>
@@ -42,7 +44,7 @@ Example Payload for creating new elevator:
 
 <li><h3>Endpoint: `/elevator/elevator/<elevator-id>` <h3> </li>  
 
->METHODS: [GET, DELETE, UPDATE]  
+>METHODS: [GET, DELETE, PUT]  
 
 Example JSON Payload for update:   
 ```json
